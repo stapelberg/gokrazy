@@ -18,7 +18,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gokrazy/gokrazy/internal/iface"
+	"github.com/stapelberg/gokrazy/internal/iface"
 
 	"golang.org/x/sys/unix"
 )

@@ -22,7 +22,7 @@ import (
 
 	"github.com/d2g/dhcp4"
 	"github.com/d2g/dhcp4client"
-	"github.com/gokrazy/gokrazy/internal/iface"
+	"github.com/stapelberg/gokrazy/internal/iface"
 )
 
 func parseDHCPDuration(b []byte) time.Duration {

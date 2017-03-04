@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gokrazy/gokrazy/internal/bundled"
+	"github.com/stapelberg/gokrazy/internal/bundled"
 
 	"golang.org/x/sys/unix"
 )
