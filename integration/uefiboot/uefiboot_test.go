@@ -42,6 +42,19 @@ func copyFile(dest, src string) error {
 	return out.Close()
 }
 
+func findOVMF() string {
+	locations := []string{
+		"/usr/share/edk2-ovmf/x64/OVMF_CODE.fd", // Arch
+		"/usr/share/OVMF/OVMF_CODE.fd",          // Ubuntu
+	}
+	for _, loc := range locations {
+		if _, err := os.Stat(loc); err == nil {
+			return loc
+		}
+	}
+	return locations[len(locations)-1] // will fail
+}
+
 func TestUEFIBoot(t *testing.T) {
 	tempdir := t.TempDir()
 	err := ioutil.WriteFile(filepath.Join(tempdir, "go.mod"), []byte(`
@@ -95,7 +108,7 @@ module github.com/gokrazy/uefiboot
 			"-nodefaults",
 			"-m", "4G",
 			"-smp", "8", // required! system gets stuck without -smp
-			"-bios", "/usr/share/edk2-ovmf/x64/OVMF_CODE.fd", // TODO: find system location
+			"-bios", findOVMF(),
 			"-net", "none", // to skip PXE boot
 			// Use -drive instead of vmtest.QemuOptions.Disks because the latter
 			// results in wiring up the devices using SCSI in a way that the
